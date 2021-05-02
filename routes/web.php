@@ -13,6 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/', function(){
     return view('home');
+});
+
+Route::get('/add-trips', function () {
+    return view('add-trips');
+});
+
+Route::post('/add-trips', function(){
+return "Posted";
 });
