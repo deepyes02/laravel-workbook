@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Users;
 use App\Http\Controllers\Home;
+use App\Http\Controllers\Places;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,5 +22,8 @@ Route::get('/', [Home::class, 'index']);
 
 // M-V-C Architecture imports controlelr from user.
 Route::get("users", [Users::class, 'index']);
+Route::view("login", "login");
+Route::post('login', [Users::class, 'login']);
 Route::get("users/{id}", [Users::class, 'getUserById']);
 
+Route::get("places", [Places::class, 'index']);
