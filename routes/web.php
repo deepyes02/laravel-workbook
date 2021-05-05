@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Users;
+use App\Http\Controllers\Home;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +15,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::view is a shortcut but it doesn't do much except display static page
+// Route::view("/", "hello");
+Route::get('/', [Home::class, 'index']);
+
+// M-V-C Architecture imports controlelr from user.
+Route::get("users", [Users::class, 'index']);
+Route::get("users/{id}", [Users::class, 'getUserById']);
+
