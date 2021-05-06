@@ -9,6 +9,6 @@ class Home extends Controller
     //
     public function index()
     {
-        return view('hello', ['paragraph'=>"Hello from Laravel Project"]);
+        return view('home', ['paragraph'=>"Hello from Laravel Project"]);
     }
 }
