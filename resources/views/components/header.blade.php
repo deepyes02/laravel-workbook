@@ -41,6 +41,11 @@
     </style>
 </head>
 <body>
+    @if (null !== session('username'))
+    <p>You are logged in as {{session('username')}}. <a href="logout">Logout</a></p>
+    @else
+    <p><a href="login">Login</a> to this site.</p>
+    @endif
     <header id="main-header-bar">
         <div class="logo">
             LARAVEL
@@ -50,8 +55,11 @@
                 <li><a href="/">Home</a></li>
                 <li><a href="/users">Users</a></li>
                 <li><a href="/places">Places</a></li>
+                @if(null !== session('username'))
+                <li><a href="/logout">Logoff</a></li>
+                @else
                 <li><a href="/login">Login</a></li>
-
+                @endif
             </ul>
         </nav>
     </header>

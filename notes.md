@@ -44,3 +44,23 @@ what is model? Make model? Fetch data from model, show data
     DB Table        Model Name
     users           user
     employees       employee
+
+__HTTP Request Methods__
+
+GEt - select from table
+post - insert into table
+put - update table
+delete - 
+head
+patch - update columns
+options
+
+__sessions__
+
+There a method to store input as sessions, as use them to display data to the user
+public function postLogin(Request $request){
+        $data = $request->input();
+        $request->session()->put('username', $data['username']);
+        return redirect ('userprofile');
+    }
+

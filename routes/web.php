@@ -27,8 +27,8 @@ Route::get("users", [Users::class, 'getData']);
 Route::get("users/{id}", [Users::class, 'getUserById']);
 
 Route::get("people", [People::class, 'index']);
-Route::view("login", "login");
-Route::post('login', [Users::class, 'login']);
+// Route::view("login", "login");
+Route::post('login', [Users::class, 'postLogin']);
 Route::get("places", [Places::class, 'index']);
 
 //noaccess page
@@ -41,3 +41,17 @@ Route::group(['middleware' => ['protectedPage']], function(){
     Route::view("login", "login");
 });
 */
+
+Route::view('userprofile', 'userprofile');
+
+Route::get("logout", [Users::class, 'logout']);
+
+Route::get("login", [Users::class, 'getLogin']);
+
+// Route::get("login", function(){
+//     if(session()->has('username'))
+//     {
+//         return redirect("/");
+//     }
+//     return view("login");
+// });
