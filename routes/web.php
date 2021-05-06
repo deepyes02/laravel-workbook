@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Users;
 use App\Http\Controllers\Home;
 use App\Http\Controllers\Places;
+use App\Http\Controllers\People;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,18 +22,22 @@ use App\Http\Controllers\Places;
 
 
 // M-V-C Architecture imports controllers from user.
+Route::get('/', [Home::class, 'index']);
 Route::get("users", [Users::class, 'index']);
-
-Route::post('login', [Users::class, 'login']);
 Route::get("users/{id}", [Users::class, 'getUserById']);
+
+Route::get("people", [People::class, 'index']);
+Route::view("login", "login");
+Route::post('login', [Users::class, 'login']);
 Route::get("places", [Places::class, 'index']);
 
 //noaccess page
 Route::view("noaccess", "noaccess");
 
 //group middleware
+/*
 Route::group(['middleware' => ['protectedPage']], function(){
     Route::get('/', [Home::class, 'index']);
     Route::view("login", "login");
 });
-
+*/

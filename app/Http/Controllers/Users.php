@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class Users extends Controller
 {
@@ -10,6 +11,7 @@ class Users extends Controller
     {
         $names = ['Anil', 'Rekha', 'Kiran', 'Shambhu'];
         return view("users", ['users' => $names]);
+
     }
     public function getUserById($input)
     {
