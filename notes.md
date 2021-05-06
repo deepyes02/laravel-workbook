@@ -64,3 +64,6 @@ public function postLogin(Request $request){
         return redirect ('userprofile');
     }
 
+__flash session__
+
+
