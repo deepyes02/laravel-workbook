@@ -18,12 +18,21 @@ use App\Http\Controllers\Places;
 
 // Route::view is a shortcut but it doesn't do much except display static page
 // Route::view("/", "hello");
-Route::get('/', [Home::class, 'index']);
 
-// M-V-C Architecture imports controlelr from user.
+
+// M-V-C Architecture imports controllers from user.
 Route::get("users", [Users::class, 'index']);
-Route::view("login", "login");
+
 Route::post('login', [Users::class, 'login']);
 Route::get("users/{id}", [Users::class, 'getUserById']);
-
 Route::get("places", [Places::class, 'index']);
+
+//noaccess page
+Route::view("noaccess", "noaccess");
+
+//group middleware
+Route::group(['middleware' => ['protectedPage']], function(){
+    Route::get('/', [Home::class, 'index']);
+    Route::view("login", "login");
+});
+

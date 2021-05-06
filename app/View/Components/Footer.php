@@ -11,9 +11,11 @@ class Footer extends Component
      *
      * @return void
      */
+    public $author;
     public function __construct()
     {
         //
+        $this->author = "Deepesh Dhakal";
     }
 
     /**
