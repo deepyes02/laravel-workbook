@@ -32,3 +32,15 @@ Middleware are of three types
         Route::view("login", "login");
         });
    3. Individual route middleware
+
+__laravel model__
+what is model? Make model? Fetch data from model, show data
+
+
+    Map Database table with class Name
+    Define database Structure
+    Write Business Login
+
+    DB Table        Model Name
+    users           user
+    employees       employee
