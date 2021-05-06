@@ -23,7 +23,7 @@ use App\Http\Controllers\People;
 
 // M-V-C Architecture imports controllers from user.
 Route::get('/', [Home::class, 'index']);
-Route::get("users", [Users::class, 'index']);
+Route::get("users", [Users::class, 'getData']);
 Route::get("users/{id}", [Users::class, 'getUserById']);
 
 Route::get("people", [People::class, 'index']);
