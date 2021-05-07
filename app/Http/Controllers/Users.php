@@ -21,8 +21,11 @@ class Users extends Controller
 
     public function postLogin(Request $request){
         $data = $request->input();
+        //flash session
+        // $request->session()->flash('username', $data);
+        //main session
         $request->session()->put('username', $data['username']);
-        return redirect ('userprofile');
+        return redirect ('login');
     }
 
     public function logout(){

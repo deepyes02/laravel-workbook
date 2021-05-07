@@ -6,6 +6,8 @@ use App\Http\Controllers\Home;
 use App\Http\Controllers\Places;
 use App\Http\Controllers\People;
 
+use App\Http\Controllers\AddTrip;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,7 +30,7 @@ Route::get("users/{id}", [Users::class, 'getUserById']);
 
 Route::get("people", [People::class, 'index']);
 // Route::view("login", "login");
-Route::post('login', [Users::class, 'postLogin']);
+
 Route::get("places", [Places::class, 'index']);
 
 //noaccess page
@@ -47,11 +49,8 @@ Route::view('userprofile', 'userprofile');
 Route::get("logout", [Users::class, 'logout']);
 
 Route::get("login", [Users::class, 'getLogin']);
+Route::post('login', [Users::class, 'postLogin']);
 
-// Route::get("login", function(){
-//     if(session()->has('username'))
-//     {
-//         return redirect("/");
-//     }
-//     return view("login");
-// });
+
+Route::get("flash", [AddTrip::class, 'getAddTrip']);
+Route::post("flash", [AddTrip::class, 'postAddTrip']);

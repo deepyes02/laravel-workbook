@@ -6,6 +6,7 @@
     <p>Submit the form below</p>
 @endif
 <h3>User Login</h3>
+
 <form method="POST" action="login">
     @csrf
     <input type="text" name="username" placeholder="Enter User Name" /><br>
