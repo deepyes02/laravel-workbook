@@ -1,23 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Posts</title>
-    <link rel="stylesheet" href="/style.css">
-</head>
-<body>
+@extends('layout')
+@section('content')
     <h1>Blog Posts</h1>
     <article>
         <h2><a href="{{url('/') . '/posts/' . $post->slug}}">{{$post->title}}</a></h2>
         <p><i>{{$post->excerpt}}</i></p>
-        <p>{{$post->body}}</p>
+        <p>{!! $post->body !!}</p>
         <p><i>{{$post->date}}</i></p>
     </article>
-
-
-<a href="/">Go back</a>
-{{-- <script src="/script.js"></script> --}}
-</body>
-</html>
+@endsection

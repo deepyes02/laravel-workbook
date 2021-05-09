@@ -2,8 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Models\Post;
-use Spatie\YamlFrontMatter\YamlFrontMatter;
-use Illuminate\Support\Facades\File;
 
 
 
@@ -19,15 +17,7 @@ use Illuminate\Support\Facades\File;
 */
 
 Route::get('/', function () {
-    // $document = YamlFrontMatter::parse(file_get_contents(resource_path('posts\my-first-post.html')));
-    // ddd($document->excerpt);
-    // ddd($posts);
-    // $posts = Post::findAllPosts();
     return view("posts", ["posts" => Post::findAllPosts()]);
-
-    // ddd($document);
-    // return view('posts', ['posts'=> Post::findAll()]);
-    // return view('posts', ['posts' => $document]);
 });
 
 Route::get('posts/{post}', function ($slug) {

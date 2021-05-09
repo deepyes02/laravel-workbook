@@ -18,3 +18,7 @@ article + article {
 .align-justify{
     text-align: justify;
 }
+
+.redHead > a{
+    color:red;
+}

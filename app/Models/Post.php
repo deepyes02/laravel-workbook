@@ -28,7 +28,18 @@ class Post
     {
         // $files = File::files(resource_path() . "\posts");
 
-        //laravel's collect method
+        // return cache()->rememberForever('posts.all', function () {
+        //     return collect(File::files(resource_path() . "\posts"))
+        //     ->map(fn($file) => YamlFrontMatter::parseFile($file))
+        //     ->map(fn($document) => new Post(
+        //             $document->title,
+        //             $document->date,
+        //             $document->excerpt,
+        //             $document->body(),
+        //             $document->slug
+        //     ))
+        //     ->sortByDesc('date');
+        // });
         return collect(File::files(resource_path() . "\posts"))
         ->map(fn($file) => YamlFrontMatter::parseFile($file))
         ->map(fn($document) => new Post(
@@ -39,52 +50,14 @@ class Post
                 $document->slug
         ))
         ->sortByDesc('date');
-
-        // return $posts;
-
-        // core php array map function
-        // $posts = array_map(function($file){
-        //     $document = YamlFrontMatter::parse(file_get_contents($file));
-        //     return new Post(
-        //         $document->title,
-        //         $document->date,
-        //         $document->excerpt,
-        //         $document->body(),
-        //         $document->href
-        //     );
-        // }, $files);
-        // return $posts;
     }
 
     public static function findOnePost($slug)
     {
-        // if (!file_exists($path = resource_path() . "/posts/{$slug}.html")) {
-        //     //
-        //     throw new ModelNotFoundException();
-        // }
-        // // return cache()->remember("posts.{$slug}", 3000, fn () => file_get_contents($path));
-        // $file = resource_path('posts\\' . $slug . '.html');
-        // $document = YamlFrontMatter::parseFile($file);
-        // $collection = collect(File::files($file));
-        // ddd($collection);
-        // return new Post(
-        //     $document->title,
-        //     $document->date,
-        //     $document->excerpt,
-        //     $document->body(),
-        //     $document->href
-        // );
-
+        if (!file_exists(resource_path() . "/posts/{$slug}.html")) {
+            throw new ModelNotFoundException();
+        }
+ 
         return static::findAllPosts()->firstWhere('slug', $slug);
     }
-} // class ends here
-
-// return collect(File::files(resource_path() . "\posts"))
-//         ->map(fn($file) => YamlFrontMatter::parseFile($file))
-//         ->map(fn($document) => new Post(
-//                 $document->title,
-//                 $document->date,
-//                 $document->excerpt,
-//                 $document->body(),
-//                 $document->href
-//         ));
+}
