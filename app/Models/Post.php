@@ -2,54 +2,22 @@
 
 namespace App\Models;
 
-use Illuminate\Support\Facades\File;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Spatie\YamlFrontMatter\YamlFrontMatter;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-
-class Post
+class Post extends Model
 {
-    public $title;
-    public $date;
-    public $excerpt;
-    public $body;
-    public $slug;
+    use HasFactory;
+    /*
+    saves from mass assignment vulnerability
+    */
+    protected $fillable = [
+        'title', 'excerpt', 'body'
+    ];
 
-    public function __construct($title, $date, $excerpt, $body, $slug)
+    public function category()
     {
-        $this->title = $title;
-        $this->date = $date;
-        $this->excerpt = $excerpt;
-        $this->body = $body;
-        $this->slug = $slug;
-    }
-
-    public static function findAllPosts()
-    {
-        return collect(File::files(resource_path() . "\posts"))
-            ->map(fn ($file) => YamlFrontMatter::parseFile($file))
-            ->map(fn ($document) => new Post(
-                $document->title,
-                $document->date,
-                $document->excerpt,
-                $document->body(),
-                $document->slug
-            ))
-            ->sortByDesc('date');
-    }
-
-    public static function findOnePost($slug)
-    {
-        return static::findAllPosts()->firstWhere('slug', $slug);
-    }
-
-    public static function findOnePostOrFail($slug)
-    {
-        $post = static::findOnePost($slug);
-
-        if ($post == null) {
-            throw new ModelNotFoundException();
-        }
-        return $post;
+        //  hasOne, hasMany, belongsTo, belongsToMany
+        return $this->belongsTo(Category::class);
     }
 }

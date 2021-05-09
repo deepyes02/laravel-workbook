@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Models\Post;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
+use App\Models\Category;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,9 +16,17 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 */
 
 Route::get('/', function () {
-    return view("posts", ["posts" => Post::findAllPosts()]);
+    return view("posts", ["posts" => Post::all()]);
 });
 
-Route::get('posts/{post}', function ($slug) {
-    return view('post', ['post' => Post::findOnePostOrFail($slug)]);
+Route::get('posts/{post:slug}', function (Post $post) {
+    return view('post', [
+        'post' => $post
+        ]);
+});
+
+Route::get('category/{category:slug}', function (Category $category) {
+    return view('category', [
+        'category' => $category
+    ]);
 });
