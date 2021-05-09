@@ -1,5 +1,4 @@
-@extends('layout')
-@section('content')
+<x-layout title="All Posts">
     <h1>Blog Posts</h1>
     @foreach ($posts as $post)
     <h2 class="{{$loop->even ? 'redHead' : ''}}"><a href="posts/{{$post->slug}}">{{$post->title}}</a></h2>
@@ -7,4 +6,4 @@
     <p class="align-justify">{!! $post->body !!}</p>
     <p>{{$post->date}}</p>
     @endforeach
-@endsection
+</x-layout>

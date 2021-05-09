@@ -26,38 +26,30 @@ class Post
 
     public static function findAllPosts()
     {
-        // $files = File::files(resource_path() . "\posts");
-
-        // return cache()->rememberForever('posts.all', function () {
-        //     return collect(File::files(resource_path() . "\posts"))
-        //     ->map(fn($file) => YamlFrontMatter::parseFile($file))
-        //     ->map(fn($document) => new Post(
-        //             $document->title,
-        //             $document->date,
-        //             $document->excerpt,
-        //             $document->body(),
-        //             $document->slug
-        //     ))
-        //     ->sortByDesc('date');
-        // });
         return collect(File::files(resource_path() . "\posts"))
-        ->map(fn($file) => YamlFrontMatter::parseFile($file))
-        ->map(fn($document) => new Post(
+            ->map(fn ($file) => YamlFrontMatter::parseFile($file))
+            ->map(fn ($document) => new Post(
                 $document->title,
                 $document->date,
                 $document->excerpt,
                 $document->body(),
                 $document->slug
-        ))
-        ->sortByDesc('date');
+            ))
+            ->sortByDesc('date');
     }
 
     public static function findOnePost($slug)
     {
-        if (!file_exists(resource_path() . "/posts/{$slug}.html")) {
+        return static::findAllPosts()->firstWhere('slug', $slug);
+    }
+
+    public static function findOnePostOrFail($slug)
+    {
+        $post = static::findOnePost($slug);
+
+        if ($post == null) {
             throw new ModelNotFoundException();
         }
- 
-        return static::findAllPosts()->firstWhere('slug', $slug);
+        return $post;
     }
 }

@@ -2,8 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Models\Post;
-
-
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,17 +20,5 @@ Route::get('/', function () {
 });
 
 Route::get('posts/{post}', function ($slug) {
-
-    // ddd($post);
-    return view('post', ['post' => Post::findOnePost($slug)]);
-
-    // ddd($document[0]);
-    // return view('post', ['post' => $document[0]]);
-
-    //    find a post by id and return the view
-    // $post = Post::findBySlug($slug);
-
-    // return view('post', [ 'post'=> $post ]);
-    // })->where('post', '[A-z_\-]+');
-
+    return view('post', ['post' => Post::findOnePostOrFail($slug)]);
 });
