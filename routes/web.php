@@ -21,21 +21,9 @@ use Illuminate\Support\Facades\File;
 Route::get('/', function () {
     // $document = YamlFrontMatter::parse(file_get_contents(resource_path('posts\my-first-post.html')));
     // ddd($document->excerpt);
-    $files = File::files(resource_path() . "\posts");
-    // ddd($files);
-    $posts = [];
-
-
-    foreach ($files as $file) {
-        $document = YamlFrontMatter::parse(file_get_contents($file));
-        $posts[] = new Post(
-            $document->title, $document->date, $document->excerpt, $document->body(), $document->href
-        );
-    }
     // ddd($posts);
-
-    return view("posts", ["posts" => $posts]);
-
+    // $posts = Post::findAllPosts();
+    return view("posts", ["posts" => Post::findAllPosts()]);
 
     // ddd($document);
     // return view('posts', ['posts'=> Post::findAll()]);
@@ -43,15 +31,9 @@ Route::get('/', function () {
 });
 
 Route::get('posts/{post}', function ($slug) {
-    $file = resource_path('posts\\' . $slug . '.html');
-    $document = YamlFrontMatter::parse(file_get_contents($file));
-    $post = new Post (
-        $document->title, $document->date, $document->excerpt, $document->body(), $document->href
-    );
+
     // ddd($post);
-    return view('post', ['post' => $post]);
-
-
+    return view('post', ['post' => Post::findOnePost($slug)]);
 
     // ddd($document[0]);
     // return view('post', ['post' => $document[0]]);
