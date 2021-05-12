@@ -4,6 +4,6 @@
 <h2><a href="#">{{$post->title}}</a></h2>
 <p><i>{{$post->excerpt}}</i></p>
 <p>{!! $post->body !!}</p>
+<a href="{{ url('/') . '/category/' . $post->category->slug}}">{{$post->category->name}}</a>
 @endforeach
-<a href="{{url('/')}}">Home</a>
 </x-layout>

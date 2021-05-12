@@ -5,6 +5,6 @@
     <p><i>{{$post->excerpt}}</i></p>
     <p>Category: <a href="{{url('/')}}/category/{{$post->category->slug}}">{{$post->category->name}}</a></p>
     <p class="align-justify">{!! $post->body !!}</p>
-    <p>{{$post->date}}</p>
+    <p>Author: <a href="{{url('/') . '/users/' . $post->user->slug}}">{{$post->user->username}}</a></p>
     @endforeach
 </x-layout>

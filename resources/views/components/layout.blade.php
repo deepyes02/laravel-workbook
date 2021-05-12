@@ -8,9 +8,16 @@
     <title>{{$title}}</title>
     <link rel="stylesheet" href="/style.css">
 </head>
-
 <body>
+<nav id="nav">
+<ul>
+<li><a href="{{url('/')}}">Home</a></li>
+<li><a href="{{url('/')}}/category">Category</a></li>
+<li><a href="{{url('/')}}/users">Users</a></li>
+</ul>
+</nav>
+<div class="body-inner">
     {{$slot}}
+</div>
 </body>
-
 </html>
