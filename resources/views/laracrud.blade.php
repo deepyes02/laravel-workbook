@@ -4,22 +4,23 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle`" aria-hidden="true">
+<div class="modal fade" id="linkFormModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle`" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
+            <!-- Modal Header -->
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Add a new Todo</h5>
+                <h5 class="modal-title" id="exampleModalLongTitle">Add New Url</h5>
                 <p class="ml-3" id="modal_box_notification"></p>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                    <span aria-hidden="true">Close &times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <form id="myForm" name="myForm" class="form-horizontal" novalidate="">
 
                     <div class="form-group">
-                        <label>Title</label>
-                        <input type="text" class="form-control" id="title" name="title" placeholder="Enter title" value="">
+                        <label>Url</label>
+                        <input type="text" class="form-control" id="url" name="url" placeholder="Enter url" value="">
                     </div>
 
                     <div class="form-group">
@@ -28,8 +29,9 @@
                     </div>
                 </form>
             </div>
+            <!--Save Changes button-->
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" id="btn-save">Save changes</button>
+                <button type="button" class="btn btn-primary" id="link-btn-save">Save changes</button>
                 <input type="hidden" id="todo_id" name="todo_id" value="0">
             </div>
         </div>
@@ -40,13 +42,13 @@
 
     <div class="d-flex bd-highlight mb-4">
         <div class="p-2 w-100 bd-highlight">
-            <h2>Laravel AJAX Example</h2>
+            <h2>jQuery Ajax CRUD</h2>
             <p id="data_add_success" color="green"></p>
         </div>
         <div class="p-2 flex-shrink-0 bd-highlight">
-            <!-- Button trigger modal -->
-            <button class="btn btn-success" id="btn-add" data-toggle="modal" data-target="#formModal">
-                Add Todo
+            <!-- Add Url Button -->
+            <button class="btn btn-success" id="link-btn-add" data-toggle="modal" data-target="#linkFormModal">
+                Add an Url
             </button>
         </div>
     </div>
@@ -56,18 +58,25 @@
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Title</th>
+                    <th>Url</th>
                     <th>Description</th>
                 </tr>
             </thead>
             <tbody id="todos-list" name="todos-list">
-               @for ($x = 1; $x < count($todos); $x++)
-               <tr id="todo{{$x}}">
-                <td>{{$x}}</td>
-                <td>{{$todos[$x]->title}}</td>
-                <td>{{$todos[$x]->description}}</td>
-               </tr>
-               @endfor
+                @for ($x = 0; $x < (count($links)); $x++) 
+                <tr id="todo{{$x}}">
+                
+                    <td>{{$links[$x]->id}}</td>
+                    <td>{{$links[$x]->url}}</td>
+                    <td>{{$links[$x]->description}}</td>
+                    <td>
+                        <!--Edit Url Button-->
+                        <button class="btn btn-success link-btn-edit" id="link-btn-edit" data-toggle="modal" data-target="#linkFormModal">Edit</button>
+                        <!--Delete Url Button-->
+                        <button class="btn btn-danger">Delete</button>
+                    </td>
+                    </tr>
+                    @endfor
             </tbody>
         </table>
 

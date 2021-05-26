@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CrudController;
+use App\Http\Controllers\ListController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,5 +14,8 @@ use App\Http\Controllers\CrudController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', [CrudController::class, 'index']);
+Route::get('/todos', [CrudController::class, 'index']);
 Route::resource('todo', CrudController::class);
+
+// routes for CRUD LINK APPLICATION
+Route::resource('link', ListController::class);
