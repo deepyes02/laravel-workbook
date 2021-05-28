@@ -91,7 +91,7 @@ class ProductController extends Controller
         if ($product !== null) {
             $product->delete();
             return [
-                'message' => "product {$product->id} was destroyed"
+                'message' => "product {$product->id} was destroyed",
             ];
         } else {
             return [
@@ -99,4 +99,15 @@ class ProductController extends Controller
             ];
         }
     }
+    /**
+     * Search for a name
+     * 
+     * @param str $name
+     * @return \Illuminate\Http\Response
+     */
+
+    public function search($name){
+         return Product::where('name', 'like', "%{$name}%")->get();
+     }
+
 }
