@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Product;
+use Exception;
 
 class ProductController extends Controller
 {
@@ -16,7 +17,7 @@ class ProductController extends Controller
     public function index()
     {
         $product = Product::all();
-        if(count($product) < 1) {
+        if (count($product) < 1) {
             return ["message" => "No products exist, please add some first"];
         } else return $product;
     }
@@ -34,8 +35,12 @@ class ProductController extends Controller
             'slug'  =>  'required',
             'price' =>  'required'
         ]);
-        Product::create($request->all());
-        return $request;
+        try {
+            $product = Product::create($request->all());
+            return $product;
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
     }
 
     /**
@@ -50,7 +55,7 @@ class ProductController extends Controller
             return Product::find($id);
         } else {
             return [
-                "message" => "can't find the product"
+                "message" => "can't find the product with id {$id}"
             ];
         }
     }
@@ -65,8 +70,12 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         $product = Product::find($id);
-        $product->update($request->all());
-        return $product;
+        if ($product !== null){
+            $product->update($request->all());
+            return $product;
+        } else if ($product === null){
+            return ["message" => "Sorry product (with id {$id}) doesn't exist"];
+        }
     }
 
     /**
@@ -79,14 +88,14 @@ class ProductController extends Controller
     public function destroy($id)
     {
         $product = Product::find($id);
-        if ($product) {
+        if ($product !== null) {
             $product->delete();
             return [
                 'message' => "product {$product->id} was destroyed"
             ];
         } else {
             return [
-                'message'   => "can not find the product and delete it",
+                'message'   => "can not find the product (id = {$id}) and delete it",
             ];
         }
     }
